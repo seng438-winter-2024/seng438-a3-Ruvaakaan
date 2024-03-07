@@ -1,4 +1,4 @@
-package org.jfree.data.test;
+package jfreechart_lab3;
 
 import static org.junit.Assert.*;
 
@@ -143,11 +143,6 @@ public class DataUtilitiesTest extends DataUtilities {
 		Number[] expected = { 1.5, Double.MAX_VALUE, -Double.MAX_VALUE, 1.2 }; // copy of the original array but with type number
 		Number[] result = DataUtilities.createNumberArray(data); // convert the original array to new type
 
-		// the following code prints out the converted array, you will notice that the last value is always null
-		for(int j=0;j<data.length;j++) {
-			System.out.println(result[j]);
-		} 
-
 		assertArrayEquals(expected, result); // check result
 	}
 
@@ -256,6 +251,7 @@ public class DataUtilitiesTest extends DataUtilities {
 
         assertEquals(expected.length, result.getItemCount()); // test the length of the result
         for (int i = 0; i < expected.length; i++) {
+//        	System.out.println(result.getValue(i).doubleValue());
             assertEquals(expected[i], result.getValue(i).doubleValue(), 0.0001); // test each cumulative percentage
         }
     }
@@ -263,8 +259,6 @@ public class DataUtilitiesTest extends DataUtilities {
 	/*
 	* This class tests the getCumulativePercentages method in the DataUtilities class
 	* using a mocked KeyedValues object where one of the values is 0. 
-	* Note: The bug in this method allows this test to pass if the first value in the KeyedValues
-	* is set to 0 as getCumulativePercentages seems to ignore the first value in calculations
 	*/
 	@Test
 	public void testGetCumulativePercentagesWithZero() {
