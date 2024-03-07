@@ -19,7 +19,18 @@ This assignment aims to familiarize students with the assessment of white-box te
 
 # 2 Manual data-flow coverage calculations for X and Y methods
 
-![RangeDFG-SENG-401 drawio](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/c8059d48-7ea5-4f2d-8fe0-12f0dd4ae66d)
+Below is the Data Flow Diagram for the getUpperBound method of the Range class:
+![RangeDFG-SENG-401 drawio (1)](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/59f4b231-18f5-4bd2-9866-5d255f8f6376)
+
+**def-use sets per statement:**
+
+|   Statement    |    Definition    |    Use    |
+| -------------- | -------- | -------- |
+| public double getLowerBound() | lower, upper | none |
+| if (lower > upper)   | none | lower, upper |
+| String msg = "Range(double, double): require lower (" + lower+ ") <= upper (" + upper + ")." | msg | lower, upper |
+| return this.lower | none | lower |
+
 
 
 # 3 A detailed description of the testing strategy for the new unit test
