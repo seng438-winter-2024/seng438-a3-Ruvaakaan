@@ -20,17 +20,16 @@ This assignment aims to familiarize students with the assessment of white-box te
 # 2 Manual data-flow coverage calculations for X and Y methods
 
 Below is the Data Flow Diagram for the getUpperBound method of the Range class:
-![RangeDFG-SENG-401 drawio](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/e979493c-a5bf-4b01-88a1-6668eb6cf5ea)
+![RangeDFG-SENG-401 drawio (1)](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/59f4b231-18f5-4bd2-9866-5d255f8f6376)
 
 def-use sets per statement:
 
-|   Statement    |    Definition    |    User    |
+|   Statement    |    Definition    |    Use    |
 | -------------- | -------- | -------- |
-|  |          |    |
-|    |  |    |
-|   | |    |
-|    |  |    |
-|    |  |    |
+| public double getLowerBound() | lower, upper | none |
+| if (lower > upper)   | none | lower, upper |
+| String msg = "Range(double, double): require lower (" + lower+ ") <= upper (" + upper + ")."; | msg | lower, upper |
+| return this.lower;  | none | lower |
 
 
 
