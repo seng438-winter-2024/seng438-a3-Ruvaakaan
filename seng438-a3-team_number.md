@@ -19,7 +19,7 @@ This assignment aims to familiarize students with the assessment of white-box te
 
 # 2 Manual data-flow coverage calculations for X and Y methods
 
-Below is the Data Flow Diagram for the Combine function in the Range class:
+Below is the Data Flow Diagram for the getUpperBound method of the Range class:
 ![RangeDFG-SENG-401 drawio](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/e979493c-a5bf-4b01-88a1-6668eb6cf5ea)
 
 
