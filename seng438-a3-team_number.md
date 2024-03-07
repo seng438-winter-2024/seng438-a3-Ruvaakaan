@@ -50,12 +50,7 @@ du-pairs covered per test-case:
 | testLowerBoundJustAboveMinimum() | (1,2), (1,4) | (1,2) | none | 
 | testValidLowerBound() | (1,2), (1,4) | (1,2) | none | 
 
-
 du-pair coverage:
-
-total number of unique du-pairs: 4 
-number of covered du-pairs: 2 
-du-pair coverage: ( 2 / 4 ) * 100% = 50%
 
 |   total number of unique du-pairs   |      number of covered du-pairs |du-pair coverage | 
 | -------------- | -------- | ---- | 
