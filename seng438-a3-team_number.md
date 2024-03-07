@@ -25,7 +25,7 @@ Below is the Data Flow Diagram for the getUpperBound method of the Range class:
 
 def-use sets per statement:
 
-|   Statement    |    Definition    |    Use    |
+|   statement    |    definition    |    use    |
 | -------------- | -------- | -------- |
 | public double getLowerBound() | lower, upper | none |
 | if (lower > upper)   | none | lower, upper |
@@ -38,9 +38,18 @@ du-pairs per variable:
 | -------------- | -------- | 
 | lower | (1,2), (1,3), (1,4) |
 | upper   | (1,2), (1,3) |
-| msg | (3,3) |
+| msg | (3,_) |
 
 pairs-per-test-case:
+
+|   test-case   |    du-pairs    | lower | upper | msg | 
+| -------------- | -------- | 
+| testLowerBoundJustBelowMaximum() | (1,2), (1,4) | (1,2) | none | 
+| testLowerBoundAtMinimum()   | (1,2), (1,4) | (1,2) | none | 
+| testInvalidLowerBoundNaN() | (1,2), (1,4) | (1,2) | none | 
+| testLowerBoundJustAboveMinimum() | (1,2), (1,4) | (1,2) | none | 
+| testValidLowerBound() | (1,2), (1,4) | (1,2) | none | 
+
 
 du-pair coverage:
 
