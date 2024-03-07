@@ -21,7 +21,7 @@ This assignment aims to familiarize students with the assessment of white-box te
 
 Below is the Data Flow Diagram for the getUpperBound method of the Range class:
 
-![RangeDFG-SENG-401 drawio](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/53059222-0bf2-4f96-877e-0edf480d7cb9)
+![RangeDFG-SENG-401 drawio (1)](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/74d52932-33fd-4522-86ad-583ccbec4da1)
 
 def-use sets per statement:
 
@@ -38,7 +38,7 @@ du-pairs per variable:
 | -------------- | -------- | 
 | lower | (1,2), (1,3), (1,4) |
 | upper   | (1,2), (1,3) |
-| msg | (3,_) |
+| msg | (3,3) |
 
 du-pairs covered per test-case:
 
