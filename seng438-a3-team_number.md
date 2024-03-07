@@ -14,7 +14,7 @@ for each group. Please see each lab document for details.)
 
 # 1 Introduction
 
-Text…
+The objectives of this lab are to introduce our group to 
 
 # 2 Manual data-flow coverage calculations for X and Y methods
 
