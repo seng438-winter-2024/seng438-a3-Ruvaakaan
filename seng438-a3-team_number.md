@@ -19,7 +19,8 @@ This assignment aims to familiarize students with the assessment of white-box te
 
 # 2 Manual data-flow coverage calculations for X and Y methods
 
-Text…
+![RangeDFG-SENG-401 drawio](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/c8059d48-7ea5-4f2d-8fe0-12f0dd4ae66d)
+
 
 # 3 A detailed description of the testing strategy for the new unit test
 
