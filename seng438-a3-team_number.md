@@ -40,7 +40,7 @@ du-pairs per variable:
 | upper   | (1,2), (1,3) |
 | msg | (3,_) |
 
-pairs-per-test-case:
+du-pairs covered per test-case:
 
 |   test-case   |      lower | upper | msg | 
 | -------------- | -------- | ---- | ----- |
@@ -52,6 +52,8 @@ pairs-per-test-case:
 
 
 du-pair coverage:
+
+
 
 # 3 A detailed description of the testing strategy for the new unit test
 
