@@ -34,12 +34,11 @@ def-use sets per statement:
 
 du-pairs per variable:
 
-|   Statement    |    Definition    |    Use    |
-| -------------- | -------- | -------- |
-| public double getLowerBound() | lower, upper | none |
-| if (lower > upper)   | none | lower, upper |
-| String msg = "Range(double, double): require lower (" + lower+ ") <= upper (" + upper + ")." | msg | lower, upper |
-| return this.lower | none | lower |
+|   variable   |    du-pairs    |
+| -------------- | -------- | 
+| lower | (1,2), (1,3), (1,4) |
+| upper   | (1,2), (1,3) |
+| msg | (3,3) |
 
 pairs-per-test-case:
 
