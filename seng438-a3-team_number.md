@@ -53,9 +53,13 @@ du-pairs covered per test-case:
 
 du-pair coverage:
 
-total number of unique du-pairs: 4 \n
-number of covered du-pairs: 2 \n
+total number of unique du-pairs: 4 
+number of covered du-pairs: 2 
 du-pair coverage: ( 2 / 4 ) * 100% = 50%
+
+|   total number of unique du-pairs   |      number of covered du-pairs |du-pair coverage | 
+| -------------- | -------- | ---- | 
+| 4 | 2 | ( 2 / 4 ) * 100% = 50% | 
 
 
 # 3 A detailed description of the testing strategy for the new unit test
