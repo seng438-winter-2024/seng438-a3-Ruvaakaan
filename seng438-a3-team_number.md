@@ -53,8 +53,8 @@ du-pairs covered per test-case:
 
 du-pair coverage:
 
-total number of unique du-pairs: 4
-number of covered du-pairs: 2
+total number of unique du-pairs: 4 \n
+number of covered du-pairs: 2 \n
 du-pair coverage: ( 2 / 4 ) * 100% = 50%
 
 
