@@ -21,7 +21,7 @@ This assignment aims to familiarize students with the assessment of white-box te
 
 Below is the Data Flow Diagram for the getUpperBound method of the Range class:
 
-![RangeDFG-SENG-401 drawio (1)](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/59f4b231-18f5-4bd2-9866-5d255f8f6376)
+![RangeDFG-SENG-401 drawio](https://github.com/seng438-winter-2024/seng438-a3-Ruvaakaan/assets/95046408/53059222-0bf2-4f96-877e-0edf480d7cb9)
 
 def-use sets per statement:
 
