@@ -6,6 +6,7 @@ import java.security.InvalidParameterException;
 
 import org.jfree.data.DataUtilities;
 import org.jfree.data.KeyedValues;
+import org.jfree.data.Values2D;
 import org.jfree.data.DefaultKeyedValues;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -28,6 +29,20 @@ public class DataUtilitiesTest extends DataUtilities {
     private KeyedValues ValidValues;
 	private Mockery ZeroMockKeyed;
 	private KeyedValues ZeroValues;
+	private Mockery RowMinMock;
+    private Values2D RowMinValues;
+    private Mockery RowMaxMock;
+    private Values2D RowMaxValues;
+	private Mockery RowEmptyRowMock;
+    private Values2D RowEmptyRowValues;
+    private Mockery RowNonEmptyMock;
+    private Values2D RowNonEmptyValues;
+	private Mockery RowEmptyTableMock;
+    private Values2D RowEmptyTableValues;
+	private Mockery RowNonNumericMock;
+    private Values2D RowNonNumericValues;
+	private Mockery RowInvalidMock;
+    private Values2D RowInvalidValues;
 
 	@BeforeClass public static void setUpBeforeClass() throws Exception { }
 
@@ -131,6 +146,129 @@ public class DataUtilitiesTest extends DataUtilities {
 				will(returnValue(3));
 			}
 		});
+		//Initialize mocking context and Values2D mock
+        RowMinMock = new Mockery();
+        RowMinValues = RowMinMock.mock(Values2D.class);
+      	//Set up expectations for the Values2D mock
+		RowMinMock.checking(new Expectations() {
+            {
+                allowing(RowMinValues).getRowCount();
+                will(returnValue(3));
+                allowing(RowMinValues).getColumnCount();
+                will(returnValue(2));
+                allowing(RowMinValues).getValue(0, 0);
+                will(returnValue(6));
+                allowing(RowMinValues).getValue(0, 1);
+                will(returnValue(7.5));
+                allowing(RowMinValues).getValue(1, 0);
+                will(returnValue(5));
+                allowing(RowMinValues).getValue(1, 1);
+                will(returnValue(2));
+                allowing(RowMinValues).getValue(2, 0);
+                will(returnValue(2.5));
+                allowing(RowMinValues).getValue(2, 1);
+                will(returnValue(2));
+            }
+        });
+		//Initialize mocking context and Values2D mock
+        RowMaxMock = new Mockery();
+        RowMaxValues = RowMaxMock.mock(Values2D.class);
+      //Set up expectations for	the Values2D mock
+	  	RowMaxMock.checking(new Expectations() {
+            {
+                allowing(RowMaxValues).getRowCount();
+                will(returnValue(3));
+                allowing(RowMaxValues).getColumnCount();
+                will(returnValue(2));
+                allowing(RowMaxValues).getValue(0, 0);
+                will(returnValue(6));
+                allowing(RowMaxValues).getValue(0, 1);
+                will(returnValue(7.5));
+                allowing(RowMaxValues).getValue(1, 0);
+                will(returnValue(5));
+                allowing(RowMaxValues).getValue(1, 1);
+                will(returnValue(2));
+                allowing(RowMaxValues).getValue(2, 0);
+                will(returnValue(2.5));
+                allowing(RowMaxValues).getValue(2, 1);
+                will(returnValue(2));
+            }
+        });
+		//Initialize mocking context and Values2D mock
+        RowEmptyRowMock = new Mockery();
+        RowEmptyRowValues = RowEmptyRowMock.mock(Values2D.class);
+		//Set up expectations for the Values2D mock
+		RowEmptyRowMock.checking(new Expectations() {
+            {
+                allowing(RowEmptyRowValues).getRowCount();
+                will(returnValue(3)); //Assuming 3 rows
+                allowing(RowEmptyRowValues).getColumnCount();
+                will(returnValue(3)); //Assuming 3 columns
+                allowing(RowEmptyRowValues).getValue(with(any(int.class)), with(any(int.class))); //Allowing any call to getValue
+                will(returnValue(null)); //Returning null to simulate an empty cell
+            }
+        });
+		//Initialize mocking context and Values2D mock
+        RowNonEmptyMock = new Mockery();
+        RowNonEmptyValues = RowNonEmptyMock.mock(Values2D.class);
+		//Set up expectations for the Values2D mock
+		RowNonEmptyMock.checking(new Expectations() {
+            {
+                allowing(RowNonEmptyValues).getRowCount();
+                will(returnValue(3));
+                allowing(RowNonEmptyValues).getColumnCount();
+                will(returnValue(2));
+                allowing(RowNonEmptyValues).getValue(0, 0);
+                will(returnValue(6));
+                allowing(RowNonEmptyValues).getValue(0, 1);
+                will(returnValue(7.5));
+                allowing(RowNonEmptyValues).getValue(1, 0);
+                will(returnValue(5));
+                allowing(RowNonEmptyValues).getValue(1, 1);
+                will(returnValue(2));
+                allowing(RowNonEmptyValues).getValue(2, 0);
+                will(returnValue(2.5));
+                allowing(RowNonEmptyValues).getValue(2, 1);
+                will(returnValue(2));
+            }
+        });
+		//Initialize mocking context and Values2D mock
+        RowEmptyTableMock = new Mockery();
+        RowEmptyTableValues = RowEmptyTableMock.mock(Values2D.class);
+		//Set up expectations for the Values2D mock
+		RowEmptyTableMock.checking(new Expectations() {{
+            allowing(RowEmptyTableValues).getColumnCount();
+            will(returnValue(0));
+            allowing(RowEmptyTableValues).getRowCount();
+            will(returnValue(0));
+        }});
+		//Initialize mocking context and Values2D mock
+        RowNonNumericMock = new Mockery();
+        RowNonNumericValues = RowNonNumericMock.mock(Values2D.class);
+		//Set up expectations for the Values2D mock
+		RowNonNumericMock.checking(new Expectations() {{
+            allowing(RowNonNumericValues).getRowCount();
+            will(returnValue(1));
+            allowing(RowNonNumericValues).getColumnCount();
+            will(returnValue(3));
+            allowing(RowNonNumericValues).getValue(0, 0);
+            will(returnValue("abc")); //Non-numeric value
+            allowing(RowNonNumericValues).getValue(0, 1);
+            will(returnValue(5.0)); //Numeric value
+            allowing(RowNonNumericValues).getValue(0, 2);
+            will(returnValue("xyz")); //Non-numeric value
+        }});
+		//Initialize mocking context and Values2D mock
+        RowInvalidMock = new Mockery();
+        RowInvalidValues = RowInvalidMock.mock(Values2D.class);
+
+        //Set up expectations for the Values2D mock
+        RowInvalidMock.checking(new Expectations() {{
+            allowing(RowInvalidValues).getColumnCount();
+            will(returnValue(2)); //Assuming 2 columns in the mock
+            allowing(RowInvalidValues).getRowCount();
+            will(returnValue(1)); //Assuming 1 row in the mock
+        }});
 	}
 
 	/**
@@ -270,8 +408,103 @@ public class DataUtilitiesTest extends DataUtilities {
 			assertEquals(expected[i], result.getValue(i).doubleValue(), 0.0001); // test each cumulative percentage
 		}
 	}
-		
+
+	/*
+	 * This class tests the behavior of the calculateRowTotal method in the DataUtilities class 
+	 * when provided with a valid table with the minimum boundary row index.
+	 */
+    @Test
+    public void calculateRowTotalValidTableMinBoundary() {
+        //Invocation and assertion
+        assertEquals(13.5, DataUtilities.calculateRowTotal(RowMinValues, 0), .0001);
+    }
+
+	/*
+	 * This class tests the behavior of the calculateRowTotal method in the DataUtilities class 
+	 * when provided with a valid table with the maximum boundary row index.
+	 */
+    @Test
+    public void calculateRowTotalValidTableMaxBoundary() {
+
+        //Invocation and assertion
+        assertEquals(4.5, DataUtilities.calculateRowTotal(RowMaxValues, 2), .0001);
+    }
+
+	/*
+	 * This class tests the behavior of the calculateRowTotal method in the DataUtilities class 
+	 * when provided with a valid table with an empty row.
+	 */
+    @Test
+    public void testCalculateRowTotalValidTableEmptyRow() {
+        //Invocation and assertion
+        assertEquals(0.0, DataUtilities.calculateRowTotal(RowEmptyRowValues, 0), 0.0001); // Sum of values in an empty row should be 0.0
+    }
+
 	/**
+	 * This class tests the behavior of the calculateRowTotal method in the DataUtilities class 
+	 * when provided with a valid non-empty table.
+	 */
+    @Test
+    public void calculateRowTotalValidNonEmptyTable() {
+        //Invocation and assertion
+        assertEquals(7, DataUtilities.calculateRowTotal(RowNonEmptyValues, 1), .0001);
+    }
+
+	/**
+	 * This class tests the behavior of the calculateRowTotal method in the DataUtilities class 
+	 * when provided with a valid empty table.
+	 */
+    @Test
+    public void testValidInputEmptyTableCalculateRowTotalValidEmptyTable() {
+        assertEquals(0.0, DataUtilities.calculateRowTotal(RowEmptyTableValues, 0), 0.0001); // Sum of values in any row of an empty table should be 0.0
+    }
+
+	/**
+	 * This class tests the behavior of the calculateRowTotal method in the DataUtilities class 
+	 * when provided with a null table.
+	 */
+	@Test(expected = InvalidParameterException.class)
+    public void testNullInputCalculateRowTotal() {
+        try {
+            // Invocation
+            DataUtilities.calculateRowTotal(null, 0); //Method under test
+        } catch (Exception e) { //If a Exception other than InvalidParameterException is caught then the test will fail since we are expecting a InvalidParameterException
+        }
+    }
+
+	/**
+	 * This class tests the behavior of the calculateRowTotal method in the DataUtilities class 
+	 * when provided with a data table containing non-numeric values.
+	 */
+    @Test(expected = InvalidParameterException.class)
+    public void testValidDataTableWithNonNumericValues() {
+        try {
+            //Invocation
+            DataUtilities.calculateRowTotal(RowNonNumericValues, 0);
+
+            //If the method call doesn't throw InvalidParameterException, fail the test
+            fail("Expected InvalidParameterException was not thrown");
+        } catch (Exception e) {
+            //Catch any exception (expected to be InvalidParameterException)
+        }
+    }
+
+	/**
+	 * This class tests the behavior of the calculateRowTotal method in the DataUtilities class 
+	 * when provided with an invalid row index.
+	 */
+    @Test
+    public void testInvalidRowIndex() {
+        //Invocation and assertion
+        try {
+            double total = DataUtilities.calculateRowTotal(RowInvalidValues, 1); //Invalid row index
+            assertEquals(0.0, total, 0.0001); //Check that the method returns 0 for an invalid row index
+        } catch (Throwable e) {
+            fail("Unexpected exception: " + e.getMessage()); //Fail the test if it does not return 0
+        }
+    }
+		
+	/*
 	* The tearDown method is typically employed to release resources such as closing database connections.
 	* However, in our scenario, where such connections are absent, we utilize it to nullify variables.
 	* While garbage collection handles this automatically, our intention here is to showcase its functionality.
@@ -288,6 +521,20 @@ public class DataUtilitiesTest extends DataUtilities {
         ValidValues = null;
 		ZeroMockKeyed = null;
 		ZeroValues = null;
+		RowMinMock = null;
+        RowMinValues = null;
+		RowMaxMock = null;
+		RowMaxValues = null;
+		RowEmptyRowMock = null;
+        RowEmptyRowValues = null;
+		RowNonEmptyMock = null;
+        RowNonEmptyValues = null;
+		RowEmptyTableMock = null;
+        RowEmptyTableValues = null;
+		RowNonNumericMock = null;
+        RowNonNumericValues = null;
+		RowInvalidMock = null;
+        RowInvalidValues = null;
 	}
 
 	@AfterClass public static void setUpAfterClass() throws Exception { }
