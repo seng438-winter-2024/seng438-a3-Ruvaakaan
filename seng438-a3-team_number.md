@@ -5,9 +5,9 @@
 | Group \#:      |    19    |
 | -------------- | -------- |
 | Student Names: |          |
-| Andrew Duong   |          |
-| Ethan Bensler  |          |
-| Joseph Duong   |          |
+| Andrew Duong   | 30149573 |
+| Ethan Bensler  | 30140326 |
+| Joseph Duong   | 30145210 |
 | Liam Brennan   | 30142832 |
 
 (Note that some labs require individual reports while others require one report
