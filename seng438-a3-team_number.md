@@ -42,8 +42,8 @@ du-pairs per variable:
 
 pairs-per-test-case:
 
-|   test-case   |    du-pairs    | lower | upper | msg | 
-| -------------- | -------- | ---- | ---- | ----- |
+|   test-case   |      lower | upper | msg | 
+| -------------- | -------- | ---- | ----- |
 | testLowerBoundJustBelowMaximum() | (1,2), (1,4) | (1,2) | none | 
 | testLowerBoundAtMinimum()   | (1,2), (1,4) | (1,2) | none | 
 | testInvalidLowerBoundNaN() | (1,2), (1,4) | (1,2) | none | 
