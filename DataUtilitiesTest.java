@@ -29,7 +29,21 @@ public class DataUtilitiesTest extends DataUtilities {
     private KeyedValues ValidValues;
 	private Mockery ZeroMockKeyed;
 	private KeyedValues ZeroValues;
-	private Mockery RowMinMock;
+	private Mockery ColumnMinMock;
+    private Values2D ColumnMinValues;
+    private Mockery ColumnMaxMock;
+    private Values2D ColumnMaxValues;
+	private Mockery ColumnEmptyColumnMock;
+    private Values2D ColumnEmptyColumnValues;
+    private Mockery ColumnNonEmptyMock;
+    private Values2D ColumnNonEmptyValues;
+	private Mockery ColumnEmptyTableMock;
+    private Values2D ColumnEmptyTableValues;
+	private Mockery ColumnNonNumericMock;
+    private Values2D ColumnNonNumericValues;
+	private Mockery ColumnInvalidMock;
+    private Values2D ColumnInvalidValues;
+    private Mockery RowMinMock;
     private Values2D RowMinValues;
     private Mockery RowMaxMock;
     private Values2D RowMaxValues;
@@ -269,6 +283,119 @@ public class DataUtilitiesTest extends DataUtilities {
             allowing(RowInvalidValues).getRowCount();
             will(returnValue(1)); //Assuming 1 row in the mock
         }});
+
+        ColumnMinMock = new Mockery();
+        ColumnMinValues  = ColumnMinMock.mock(Values2D.class);
+        ColumnMinMock.checking(new Expectations() {{
+            allowing(values).getRowCount();
+            will(returnValue(2));
+            allowing(values).getColumnCount();
+            will(returnValue(3));
+            allowing(values).getValue(0, 0);
+            will(returnValue(6));
+            allowing(values).getValue(0, 1);
+            will(returnValue(7.5));
+            allowing(values).getValue(0, 2);
+            will(returnValue(5));
+            allowing(values).getValue(1, 0);
+            will(returnValue(2));
+            allowing(values).getValue(1, 1);
+            will(returnValue(2.5));
+            allowing(values).getValue(1, 2);
+            will(returnValue(2));
+            }
+        });
+
+        ColumnInvalidMock = new Mockery();
+        ColumnInvalidValues = ColumnInvalidMock.mock(Values2D.class);
+        ColumnInvalidMock.checking(new Expectations() {{
+            allowing(values).getColumnCount();
+            will(returnValue(1)); //Assuming 1 column in the mock
+            allowing(values).getRowCount();
+            will(returnValue(2)); //Assuming 2 rows in the mock
+        }});
+
+        ColumnMaxMock= new Mockery();
+        ColumnMaxValues = ColumnMaxMock.mock(Values2D.class);
+        ColumnMaxMock.checking(new Expectations() {
+            {
+                allowing(values).getRowCount();
+                will(returnValue(2));
+                allowing(values).getColumnCount();
+                will(returnValue(3));
+                allowing(values).getValue(0, 0);
+                will(returnValue(6));
+                allowing(values).getValue(0, 1);
+                will(returnValue(7.5));
+                allowing(values).getValue(0, 2);
+                will(returnValue(5));
+                allowing(values).getValue(1, 0);
+                will(returnValue(2));
+                allowing(values).getValue(1, 1);
+                will(returnValue(2.5));
+                allowing(values).getValue(1, 2);
+                will(returnValue(2));
+            }
+        });
+
+        ColumnEmptyColumnMock= new Mockery();
+        ColumnEmptyColumnValues = ColumnEmptyColumnMock.mock(Values2D.class);
+        ColumnEmptyColumnMock.checking(new Expectations() {{
+            allowing(values).getRowCount();
+            will(returnValue(3));
+
+            allowing(values).getColumnCount();
+            will(returnValue(1));
+
+            allowing(values).getValue(with(any(int.class)), with(any(int.class)));
+            will(returnValue(null)); //Return null for all values in the column
+        }});
+        ColumnNonEmptyMock = new Mockery();
+        ColumnNonEmptyValues = ColumnNonEmptyMock.mock(Values2D.class);
+        ColumnNonEmptyMock.checking(new Expectations() {{
+            allowing(values).getRowCount();
+            will(returnValue(2));
+            allowing(values).getColumnCount();
+            will(returnValue(3));
+            allowing(values).getValue(0, 0);
+            will(returnValue(6));
+            allowing(values).getValue(0, 1);
+            will(returnValue(7.5));
+            allowing(values).getValue(0, 2);
+            will(returnValue(5));
+            allowing(values).getValue(1, 0);
+            will(returnValue(2));
+            allowing(values).getValue(1, 1);
+            will(returnValue(2.5));
+            allowing(values).getValue(1, 2);
+            will(returnValue(2));
+        }});
+
+        ColumnEmptyTableMock = new Mockery();
+        ColumnEmptyTableValues = ColumnEmptyTableMock .mock(Values2D.class);
+        ColumnEmptyTableMock.checking(new Expectations() {{
+            allowing(values).getRowCount();
+            will(returnValue(0));
+
+            allowing(values).getColumnCount();
+            will(returnValue(0));
+        }});
+
+        ColumnNonNumericMock = new Mockery();
+        ColumnNonNumericValues = ColumnNonNumericMock.mock(Values2D.class);
+        ColumnNonNumericMock.checking(new Expectations() {{
+            allowing(values).getRowCount();
+            will(returnValue(3));
+            allowing(values).getColumnCount();
+            will(returnValue(1));
+            allowing(values).getValue(0, 0);
+            will(returnValue("abc")); //Non-numeric value
+            allowing(values).getValue(1, 0);
+            will(returnValue(5.0)); //Numeric value
+            allowing(values).getValue(2, 0);
+            will(returnValue("xyz")); //Non-numeric value
+        }});
+
 	}
 
 	/**
@@ -503,7 +630,98 @@ public class DataUtilitiesTest extends DataUtilities {
             fail("Unexpected exception: " + e.getMessage()); //Fail the test if it does not return 0
         }
     }
-		
+    
+    /**
+     * This class tests the behavior of the calculateColumnTotal method in the DataUtilities class 
+     * when provided with a valid table with the minimum boundary column index.
+     */
+    @Test
+    public void testValidDataTableMinBoundaryColumnIndex() {
+        //Invocation and assertion
+        assertEquals(8.0, DataUtilities.calculateColumnTotal(values, 0), .0001);
+    }
+
+    /**
+     * This class tests the behavior of the calculateColumnTotal method in the DataUtilities class 
+     * when provided with a null table.
+     */
+    @Test(expected = InvalidParameterException.class)
+    public void testNullInputCalculateColumnTotal() {
+        try {
+            //Invocation
+            DataUtilities.calculateColumnTotal(null, 0); // Method under test
+        } catch (Exception e) {
+            //If an exception other than InvalidParameterException is caught, the test will fail since we are expecting an InvalidParameterException
+        }
+    }
+    /**
+     * This class tests the behavior of the calculateColumnTotal method in the DataUtilities class 
+     * when provided with an invalid column index.
+     */
+    @Test
+    public void testInvalidColumnIndex() {
+        //Invocation
+        try {
+            double total = DataUtilities.calculateColumnTotal(values, 1); //Invalid column index
+            //Check that the method returns 0 for an invalid column index
+            assertEquals(0.0, total, 0.0001);
+        } catch (Throwable e) {
+            //Fail the test if it does not return 0
+            fail("Unexpected exception: " + e.getMessage());
+        }
+    }
+    /**
+     * This class tests the behavior of the calculateColumnTotal method in the DataUtilities class 
+     * when provided with a valid table with the maximum boundary column index.
+     */
+    @Test
+    public void testValidDataTableMaxBoundaryColumnIndex() {
+        //Invocation and assertion
+        assertEquals(7.0, DataUtilities.calculateColumnTotal(values, 2), .0001);
+    }
+    /**
+     * This class tests the behavior of the calculateColumnTotal method in the DataUtilities class 
+     * when provided with a valid table with an empty column.
+     */
+    @Test
+    public void testCalculateColumnTotalValidTableEmptyColumn() {
+        //Invocation and assertion
+        assertEquals(0.0, DataUtilities.calculateColumnTotal(values, 0), 0.0001);
+    }
+    /**
+     * This class tests the behavior of the calculateColumnTotal method in the DataUtilities class 
+     * when provided with a valid non-empty table.
+     */
+    @Test
+    public void calculateColumnTotalValidNonEmptyTable() {
+        //Invocation and assertion
+        assertEquals(10.0, DataUtilities.calculateColumnTotal(values, 1), .0001);
+    }
+    /**
+     * This class tests the behavior of the calculateColumnTotal method in the DataUtilities class 
+     * when provided with a valid empty table.
+     */
+    @Test
+    public void testValidInputEmptyTableCalculateColumnTotal() {
+        //Invocation and assertion for an empty table should be 0
+        assertEquals(0.0, DataUtilities.calculateColumnTotal(values, 0), 0.0001);
+    }
+    /**
+     * This class tests the behavior of the calculateColumnTotal method in the DataUtilities class 
+     * when provided with a data table containing non-numeric values.
+     */
+    @Test(expected = InvalidParameterException.class)
+    public void testCalculateColumnTotalValidDataTableWithNonNumericValues() {
+        try {
+            //Invocation
+            DataUtilities.calculateColumnTotal(values, 0);
+
+            //If the method call doesn't throw InvalidParameterException, fail the test
+            fail("Expected InvalidParameterException was not thrown");
+        } catch (Exception e) {
+            //Catch any exception other than InvalidParameterException which will cause the test to fail
+        }
+    }
 	/*
 	* The tearDown method is typically employed to release resources such as closing database connections.
 	* However, in our scenario, where such connections are absent, we utilize it to nullify variables.
@@ -535,6 +753,20 @@ public class DataUtilitiesTest extends DataUtilities {
         RowNonNumericValues = null;
 		RowInvalidMock = null;
         RowInvalidValues = null;
+        ColumnMinMock = null;
+        ColumnMinValues  = null;
+        ColumnInvalidMock = null;
+        ColumnInvalidValues = null;
+        ColumnMaxMock= null;
+        ColumnMaxValues = null;
+        ColumnEmptyColumnMock= null;
+        ColumnEmptyColumnValues = null;
+        ColumnNonEmptyMock = null;
+        ColumnNonEmptyValues = null;
+        ColumnEmptyTableMock = null;
+        ColumnEmptyTableValues = null;
+        ColumnNonNumericMock = null;
+        ColumnNonNumericValues = null;
 	}
 
 	@AfterClass public static void setUpAfterClass() throws Exception { }
