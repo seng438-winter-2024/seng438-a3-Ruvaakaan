@@ -365,7 +365,7 @@ public class RangeTest {
 
 	@Test
 	public void testContainsInputAtBoundOfZeroRange() {
-		assertTrue(range.contains(0)); // Value at the point range
+		assertTrue(pointRangeAtZero.contains(0)); // Value at the point range
 	}
 
 	/**
