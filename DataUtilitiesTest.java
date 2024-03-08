@@ -856,11 +856,11 @@ public class DataUtilitiesTest extends DataUtilities {
         context.checking(new Expectations() {{
             allowing(data).getItemCount();
             will(returnValue(-1));
-            allowing(MaxMinValues).getKey(0);
+            allowing(data).getKey(0);
 			will(returnValue("0"));
-			allowing(MaxMinValues).getKey(1);
+			allowing(data).getKey(1);
 			will(returnValue("1"));
-			allowing(MaxMinValues).getKey(2);
+			allowing(data).getKey(2);
 			will(returnValue("2"));
             allowing(data).getValue(0);
             will(returnValue(1));
